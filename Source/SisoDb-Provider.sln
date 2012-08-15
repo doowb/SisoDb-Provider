@@ -61,7 +61,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisoDb.Sql2005", "Projects\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisoDb.Specifications.Sql2005", "Tests\SisoDb.Specifications.Sql2005\SisoDb.Specifications.Sql2005.csproj", "{9CC4B638-4647-497B-B025-43C9280FAF63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisoDb.SqlAzure", "SisoDb.SqlAzure\SisoDb.SqlAzure.csproj", "{4C580E34-8248-49B1-A76C-3BE9159E159E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisoDb.SqlAzure", "Projects\SisoDb.SqlAzure\SisoDb.SqlAzure.csproj", "{4C580E34-8248-49B1-A76C-3BE9159E159E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
