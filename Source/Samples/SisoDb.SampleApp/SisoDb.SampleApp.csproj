@@ -92,6 +92,10 @@
       <Project>{8F79E2CB-91D6-4359-833A-A236BB0F814D}</Project>
       <Name>SisoDb.Sql2012</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Projects\SisoDb.SqlAzure\SisoDb.SqlAzure.csproj">
+      <Project>{4C580E34-8248-49B1-A76C-3BE9159E159E}</Project>
+      <Name>SisoDb.SqlAzure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Projects\SisoDb.SqlCe4\SisoDb.SqlCe4.csproj">
       <Project>{C70A59D2-F7B0-46D0-95C4-F375EEDAEB5E}</Project>
       <Name>SisoDb.SqlCe4</Name>

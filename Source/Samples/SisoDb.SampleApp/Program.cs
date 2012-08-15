@@ -9,6 +9,7 @@ using SisoDb.Sql2005;
 using SisoDb.Sql2008;
 using SisoDb.Sql2012;
 using SisoDb.SqlCe4;
+using SisoDb.SqlAzure;
 
 namespace SisoDb.SampleApp
 {
@@ -23,11 +24,13 @@ namespace SisoDb.SampleApp
             //********* SQL2005 ***********
             //var db = "SisoDb.Sql2005".CreateSql2005Db();
             //********* SQL2008 ***********
-            var db = "SisoDb.Sql2008".CreateSql2008Db();
+            //var db = "SisoDb.Sql2008".CreateSql2008Db();
             //********* SQL2012 ***********
             //var db = "SisoDb.Sql2012".CreateSql2012Db();
             //********* SQLCE4 ***********
             //var db = "SisoDb.SqlCe4".CreateSqlCe4Db();
+            //********* SQLAzure *********
+            var db = "SisoDb.SqlAzure".CreateSqlAzureDb();
             //********************************************
 
             db.EnsureNewDatabase();
