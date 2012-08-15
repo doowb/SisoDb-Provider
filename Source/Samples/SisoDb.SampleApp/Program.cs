@@ -16,47 +16,47 @@ namespace SisoDb.SampleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hi. Goto the Sample-app and open Program.cs and App.config and ensure that you are satisfied with the connection string.");
-            Console.ReadKey();
-            return;
+            //Console.WriteLine("Hi. Goto the Sample-app and open Program.cs and App.config and ensure that you are satisfied with the connection string.");
+            //Console.ReadKey();
+            //return;
 
             //********* SQL2005 ***********
             //var db = "SisoDb.Sql2005".CreateSql2005Db();
             //********* SQL2008 ***********
-            //var db = "SisoDb.Sql2008".CreateSql2008Db();
+            var db = "SisoDb.Sql2008".CreateSql2008Db();
             //********* SQL2012 ***********
             //var db = "SisoDb.Sql2012".CreateSql2012Db();
             //********* SQLCE4 ***********
             //var db = "SisoDb.SqlCe4".CreateSqlCe4Db();
             //********************************************
 
-            //db.EnsureNewDatabase();
+            db.EnsureNewDatabase();
             
             //Some tweaks
             //db.Settings.AllowUpsertsOfSchemas = false;
             //db.Settings.SynchronizeSchemaChanges = false;
 
             //To get rid of warm up in tests as it first syncs schemas etc
-            //db.UpsertStructureSet<Customer>();
+            db.UpsertStructureSet<Customer>();
 
-            //InsertCustomers(1, 10000, db);
+            InsertCustomers(1, 10000, db);
 
-            //ProfilingInserts(db, 1000, 5);
-            //ProfilingQueries(() => FirstOrDefault(db, 500, 550));
-            //ProfilingQueries(() => SingleOrDefault(db, 500, 550));
-            //ProfilingQueries(() => GetAllCustomers(db));
-            //ProfilingQueries(() => GetAllCustomersAsJson(db));
-            //ProfilingQueries(() => GetCustomersViaIndexesTable(db, 500, 550));
-            //ProfilingQueries(() => GetCustomersAsJsonViaIndexesTable(db, 500, 550));
+            ProfilingInserts(db, 1000, 5);
+            ProfilingQueries(() => FirstOrDefault(db, 500, 550));
+            ProfilingQueries(() => SingleOrDefault(db, 500, 550));
+            ProfilingQueries(() => GetAllCustomers(db));
+            ProfilingQueries(() => GetAllCustomersAsJson(db));
+            ProfilingQueries(() => GetCustomersViaIndexesTable(db, 500, 550));
+            ProfilingQueries(() => GetCustomersAsJsonViaIndexesTable(db, 500, 550));
 
-            //UpsertSp(db, 500, 550);
-            //ProfilingQueries(() => GetCustomersViaSpExp(db, 500, 550));
-            //ProfilingQueries(() => GetCustomersViaSpRaw(db, 500, 550));
+            UpsertSp(db, 500, 550);
+            ProfilingQueries(() => GetCustomersViaSpExp(db, 500, 550));
+            ProfilingQueries(() => GetCustomersViaSpRaw(db, 500, 550));
 
-            //ProfilingUpdateMany(db, 500, 550);
+            ProfilingUpdateMany(db, 500, 550);
 
-            //Console.WriteLine("---- Done ----");
-            //Console.ReadKey();
+            Console.WriteLine("---- Done ----");
+            Console.ReadKey();
         }
 
         private static void ProfilingUpdateMany(ISisoDatabase database, int customerNoFrom, int customerNoTo)
