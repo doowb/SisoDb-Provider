@@ -44,26 +44,27 @@ namespace SisoDb.SampleApp
 
             InsertCustomers(1, 10000, db);
 
-            ProfilingInserts(db, 1000, 5);
-            ProfilingQueries(() => FirstOrDefault(db, 500, 550));
-            ProfilingQueries(() => SingleOrDefault(db, 500, 550));
-            ProfilingQueries(() => GetAllCustomers(db));
-            ProfilingQueries(() => GetAllCustomersAsJson(db));
-            ProfilingQueries(() => GetCustomersViaIndexesTable(db, 500, 550));
-            ProfilingQueries(() => GetCustomersAsJsonViaIndexesTable(db, 500, 550));
+            ProfilingInserts(db, 1000, 5, "Inserts");
+            ProfilingQueries(() => FirstOrDefault(db, 500, 550), "First or Default");
+            ProfilingQueries(() => SingleOrDefault(db, 500, 550), "Single or Default");
+            ProfilingQueries(() => GetAllCustomers(db), "Get All Customer");
+            ProfilingQueries(() => GetAllCustomersAsJson(db), "Get All Customers As Json");
+            ProfilingQueries(() => GetCustomersViaIndexesTable(db, 500, 550), "Get Customers Via Indexes Table");
+            ProfilingQueries(() => GetCustomersAsJsonViaIndexesTable(db, 500, 550), "Get Customers As Json Via Indexes Table");
 
             UpsertSp(db, 500, 550);
-            ProfilingQueries(() => GetCustomersViaSpExp(db, 500, 550));
-            ProfilingQueries(() => GetCustomersViaSpRaw(db, 500, 550));
+            ProfilingQueries(() => GetCustomersViaSpExp(db, 500, 550), "Get Customers Via Sp Exp");
+            ProfilingQueries(() => GetCustomersViaSpRaw(db, 500, 550), "Get Customers Via Sp Raw");
 
-            ProfilingUpdateMany(db, 500, 550);
+            ProfilingUpdateMany(db, 500, 550, "Update Many");
 
             Console.WriteLine("---- Done ----");
             Console.ReadKey();
         }
 
-        private static void ProfilingUpdateMany(ISisoDatabase database, int customerNoFrom, int customerNoTo)
+        private static void ProfilingUpdateMany(ISisoDatabase database, int customerNoFrom, int customerNoTo, string title)
         {
+            Console.WriteLine("---- {0} ----", title);
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             using (var session = database.BeginSession())
@@ -82,10 +83,12 @@ namespace SisoDb.SampleApp
 
                 Console.WriteLine("Total rows = {0}", rowCount);
             }
+            Console.WriteLine();
         }
 
-        private static void ProfilingInserts(ISisoDatabase database, int numOfCustomers, int numOfItterations)
+        private static void ProfilingInserts(ISisoDatabase database, int numOfCustomers, int numOfItterations, string title)
         {
+            Console.WriteLine("---- {0} ----", title);
             var stopWatch = new Stopwatch();
 
             for (var c = 0; c < numOfItterations; c++)
@@ -106,10 +109,12 @@ namespace SisoDb.SampleApp
 
                 Console.WriteLine("Total rows = {0}", rowCount);
             }
+            Console.WriteLine();
         }
 
-        private static void ProfilingQueries(Func<int> queryAction)
+        private static void ProfilingQueries(Func<int> queryAction, string title)
         {
+            Console.WriteLine("---- {0} ----", title);
             for (var c = 0; c < 2; c++)
             {
                 var stopWatch = new Stopwatch();
@@ -121,6 +126,7 @@ namespace SisoDb.SampleApp
                 Console.WriteLine("customers.Count() = {0}", customersCount);
                 Console.WriteLine("TotalSeconds = {0}", stopWatch.Elapsed.TotalSeconds);
             }
+            Console.WriteLine();
         }
 
         private static void InsertCustomers(int numOfItterations, int numOfCustomers, ISisoDatabase database)
@@ -150,7 +156,10 @@ namespace SisoDb.SampleApp
 
         private static int GetAllCustomersAsJson(ISisoDatabase database)
         {
-            return database.UseOnceTo().Query<Customer>().ToEnumerableOfJson().Count();
+            using (var session = database.BeginSession())
+            {
+                return session.Query<Customer>().ToEnumerableOfJson().Count();
+            }
         }
 
         private static int GetCustomersViaIndexesTable(ISisoDatabase database, int customerNoFrom, int customerNoTo)

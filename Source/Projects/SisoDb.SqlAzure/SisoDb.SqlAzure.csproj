@@ -47,6 +47,7 @@
     <Compile Include="SqlAzureDbFactory.cs" />
     <Compile Include="SqlAzureProviderFactory.cs" />
     <Compile Include="SqlAzureQueryGenerator.cs" />
+    <Compile Include="SqlAzureServerClient.cs" />
     <Compile Include="SqlAzureSession.cs" />
     <Compile Include="SqlAzureStatements.cs" />
   </ItemGroup>

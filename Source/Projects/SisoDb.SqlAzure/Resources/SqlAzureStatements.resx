@@ -154,8 +154,7 @@ create nonclustered index [IX_{0}_Q] on [{0}] ([StructureId],[MemberPath],[Value
 alter table [{0}] with nocheck add constraint FK_{0}_{1} foreign key (StructureId) references [{1}] (StructureId) on update no action on delete cascade;</value>
   </data>
   <data name="CreateDatabase" xml:space="preserve">
-    <value>create database [{0}];
-ALTER DATABASE [{0}] SET COMPATIBILITY_LEVEL = 100;</value>
+    <value>create database [{0}];</value>
   </data>
   <data name="CreateDatesIndexesGuid" xml:space="preserve">
     <value>create table [{0}] (
@@ -449,12 +448,7 @@ delete from [{0}] where StructureId in({1});</value>
 delete from [{0}] where StructureId &gt;= @idFrom and StructureId &lt;= @idTo;</value>
   </data>
   <data name="DropDatabase" xml:space="preserve">
-    <value>if (select DB_ID('{0}')) is not null
-begin
-    alter database [{0}] set offline with rollback immediate;
-    alter database [{0}] set online;
-    drop database [{0}];
-end</value>
+    <value>drop database [{0}];</value>
   </data>
   <data name="DropStructureTables" xml:space="preserve">
     <value>set nocount on;
